@@ -47,12 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode == 'add') {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    print('<div class="form-group formresult"><pre>');
+    print('<div class="form-group"><pre>');
     print('$_REQUEST =><br>');
     print_r($_REQUEST);
+    if (isset($_FILES)) {
+        print('$_FILES =><br>');
+        print_r($_FILES);
+    }
     print('</pre></div>');
 }
-if (isset($mode)) {
-    include("page_parts/5_return_button.html");
-}
+
+include("page_parts/5_return_button.html");
+
 require('page_parts/4_footer.html');

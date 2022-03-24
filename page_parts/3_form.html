@@ -1,23 +1,30 @@
 <div class="container-fluid">
-                <div class="row row-cols-2">
-                    <form method="post" action="index.php">
-                        <div class="form-group row">
+    <div class="row mb-3 bg-info text-white">
+        <div class="col text-center">
+            <h2>Форма заполнения данных о пользователе</h2>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+                <div class="row row-cols-2 justify-content-md-center">
+                    <form method="post" action="index.php" class="form-group border border-primary">
+                        <div class="form-group row m-3">
                             <label for="firstname" class="col col-form-label text-center">Имя</label>
                             <input id="firstname" class="col" type="text" name="firstname" placeholder="Имя" required="">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                             <label for="lastname" class="col col-form-label text-center">Фамилия</label>
                             <input id="lastname" class="col" type="text" name="lastname" placeholder="Фамилия" required="">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                             <label id="email" class="col col-form-label text-center">Email</label>
                             <input id="email" class="col" type="email" name="email" placeholder="Адрес email" required="">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                             <label id="password" class="col col-form-label text-center">Пароль</label>
                             <input id="password" class="col" type="password" name="password" placeholder="Пароль" required="" autocomplete="new-password">
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                             <legend class="col-form-label col text-center">Пол</legend>
                             <div class="col">
                                 <div class="form-check-inline">
@@ -30,27 +37,27 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                                 <label for="list_users" class="col col-form-label col text-center">Доступ к списку пользователей</label>
                                 <select class="form-control col " id="list_users" name="list_users" required>
                                     <option value="enabled">Разрешен</option>
                                     <option value="disabled">Запрещен</option>
                                 </select>
                         </div>
-                        <div class="form-group row">
+                        <div class="form-group row m-3">
                             <label for="form_textarea" class="col col-form-label text-center">Ваше сообщение</label>
-                            <textarea class="form-control col" id="form_textarea" rows="2" placeholder="Наберите текст Вашего сообщения в данном поле"></textarea>
+                            <textarea class="form-control col" id="form_textarea" name="form_textarea" rows="2" placeholder="Наберите текст Вашего сообщения в данном поле" required></textarea>
                             </select>
                         </div>
-                        <div class="for-group row">
+                        <div class="for-group row m-3">
                             <label for="input_file" class="col col-form-label text-center">Выберите файл для загрузки</label>
-                            <input type="file" class="col" id="input_file">
+                            <input type="file" class="col" id="input_file" name="input_file" required>
                         </div>
-                        <div class="form-group row justify-content-center align-items-center">
-                            <div class="col-4">
+                        <div class="form-group row justify-content-center align-items-center m-3">
+                            <div class="col-sm-4">
                                     <input class="btn btn-warning btn-block" type="reset" value="Очистить" title="Внимание! Действие удалит все введенные данные из формы!">
                             </div>
-                            <div class="col-4">
+                            <div class="col-sm-4">
                                 <input class="btn btn-primary btn-block" type="submit" value="Отправить">
                         </div>
                         </div>
