@@ -17,38 +17,51 @@ mysqli_set_charset($mysqli_link, 'utf8mb4');
 if (mysqli_connect_errno()) {
     throw new RuntimeException('mysqli connection error: ' . mysqli_connect_error());
 } else {
-    echo "👍 Установлено подключение к БД!<br>";
-    echo "<br>";
+    echo '👍 Установлено подключение к БД!<br>';
+    echo '<br>';
 }
 
-$query = "SELECT id, firstname, lastname, email, salt FROM records";
+$auth_email = trim($_REQUEST['email']);
 
-if ($result = mysqli_query($mysqli_link, $query)) {
-    mysqli_close($mysqli_link);
-    echo "<table class='table'>";
-    echo "<thead>";
-    echo "<tr>";
-    echo "  <th scope='col'>id</th>";
-    echo "  <th scope='col'>Firstname</th>";
-    echo "  <th scope='col'>Lastname</th>";
-    echo "  <th scope='col'>Email</th>";
-    echo "  <th scope='col'>Hashed password</th>";
-    echo "</tr>";
-    echo "</thead>";
-    echo "<tbody>";
-    while ($row = mysqli_fetch_row($result)) {
-        printf("<tr>
-        <th scope='row'>%s</th>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        <td>%s</td>
-        </tr>",
-        $row[0], $row[1], $row[2], $row[3], $row[4]);
+$query = "SELECT firstname, email, salt, userlisting from 6711f799_users where email='$auth_email' and userlisting=true";
+$result_arr = mysqli_query($mysqli_link, $query);
+    if (mysqli_num_rows($result_arr) === 1) {
+        $row = mysqli_fetch_assoc($result_arr);
+        if (password_verify($_POST['password'], $row['salt'])) {
+            $query = "SELECT uid, firstname, lastname, email FROM 6711f799_users";
+            if ($result = mysqli_query($mysqli_link, $query)) {
+                mysqli_close($mysqli_link);
+                echo "Здравствуйте, $row[firstname] 👋";
+                echo '<table class="table">';
+                echo '<thead>';
+                echo '<tr>';
+                echo '  <th scope="col">id</th>';
+                echo '  <th scope="col">Firstname</th>';
+                echo '  <th scope="col">Lastname</th>';
+                echo '  <th scope="col">Email</th>';
+                echo '</tr>';
+                echo '</thead>';
+                echo '<tbody>';
+                while ($row = mysqli_fetch_row($result)) {
+                    printf('<tr>
+                    <th scope="row">%s</th>
+                    <td>%s</td>
+                    <td>%s</td>
+                    <td>%s</td>
+                    </tr>',
+                    $row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+                }
+                echo '</tbody>';
+                echo '</table>';
+            } else {
+                printf(' 👎 Что-то пошло не так.\n');
+            }
+            echo '</div>';
+        }
+        else {
+            echo " <script>alert('Введен неверный пароль.');</script>  ";
+        }
     }
-    echo "</tbody>";
-    echo "</table>";
-} else {
-    printf(" 👎 Что-то пошло не так.\n");
-}
-echo "</div>";
+    else {
+        echo " <script>alert('Доступ запрещен!');</script>  ";
+    }
