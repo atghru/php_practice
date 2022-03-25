@@ -1,6 +1,7 @@
 <?php
+// phpinfo();
 require('page_parts/0.0_Header.html');
-define('BEEPBOOP', false);
+define('BEEPBOOP', true);
 $mode = $_REQUEST['mode'];
 
 if (!isset($mode)) {
@@ -21,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'auth') {
     require('page_parts/6.1_ListData.php');
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP == true) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP) {
     print('<div><pre>');
     print('$_REQUEST =><br>');
     print_r($_REQUEST);
