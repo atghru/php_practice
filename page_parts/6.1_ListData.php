@@ -23,7 +23,7 @@ $result_arr = mysqli_query($mysqli_link, $query);
     if (mysqli_num_rows($result_arr) === 1) {
         $row = mysqli_fetch_assoc($result_arr);
         if (password_verify($_POST['password'], $row['salt'])) {
-            $query = "SELECT uid, firstname, lastname, email FROM 6711f799_users";
+            $query = "select m.msgid, u.firstname, u.lastname, u.email, m.msgtext, m.filepath from 6711f799_messages as m inner join 6711f799_users as u on m.uid=u.uid";
             if ($result = mysqli_query($mysqli_link, $query)) {
                 mysqli_close($mysqli_link);
                 $success_msg = "Здравствуйте, $row[firstname]! 👋";
@@ -32,21 +32,22 @@ $result_arr = mysqli_query($mysqli_link, $query);
                 echo '<table class="table table-striped border border-secondary">';
                 echo '<thead class="table-secondary">';
                 echo '<tr>';
-                echo '  <th scope="col">id</th>';
-                echo '  <th scope="col">Firstname</th>';
-                echo '  <th scope="col">Lastname</th>';
-                echo '  <th scope="col">Email</th>';
+                echo '  <th scope="col">Message id</th>';
+                echo '  <th scope="col">Author</th>';
+                echo '  <th scope="col">Author email</th>';
+                echo '  <th scope="col">Message text</th>';
+                echo '  <th scope="col">Uploaded file</th>';
                 echo '</tr>';
                 echo '</thead>';
                 echo '<tbody>';
                 while ($row = mysqli_fetch_row($result)) {
-                    printf('<tr>
-                    <th scope="row">%s</th>
-                    <td>%s</td>
-                    <td>%s</td>
-                    <td>%s</td>
-                    </tr>',
-                    $row[0], $row[1], $row[2], $row[3], $row[4], $row[5]);
+                    print("<tr>
+                    <th scope=\"row\">$row[0]</th>
+                    <td>$row[1] $row[2]</td>
+                    <td>$row[3]</td>
+                    <td><p>$row[4]</p></td>
+                    <td><a class=\"bi bi-cloud-arrow-down\" href=\"/download.php?msgid=$row[0]&filename=$row[5]\">$row[5] <img src=\"cloud-arrow-down.svg\"></a></td>
+                    </tr>");
                 }
                 echo '</tbody>';
                 echo '</table>';
