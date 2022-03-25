@@ -15,13 +15,13 @@ else {
     $password = password_hash(trim($_REQUEST['password']), PASSWORD_DEFAULT);
     (trim($_REQUEST['userlisting'])==='disabled') ? ($userlisting = 0) : ($userlisting = 1);
 
-    $query_insert = "insert into 6711f799_users (firstname, lastname, email, gender, salt, userlisting) values('$firstname', '$lastname', '$email', '$gender','$password', '$userlisting')";
-    print($query_insert);
+    $query_insert = "insert into 6711f799_users (firstname, lastname, email, gender, salt, userlisting) values('$firstname', '$lastname', '$email', '$gender','$password', $userlisting)";
     if (mysqli_query($link, $query_insert)) {
+        $success_msg = '👍 Запись № '.mysqli_insert_id($link).' добавлена в таблицу.';
         require('page_parts/2.2_AlertSuccess.php');
     }
     else {
-        $err_mesg = '👎 Ошибка: '.mysqli_error($link);
+        $error_msg = '👎 Ошибка: '.mysqli_error($link);
         require('page_parts/2.1_AlertDanger.php');
     }
 

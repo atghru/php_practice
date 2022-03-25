@@ -1,13 +1,13 @@
-<div class="container-fluid">
+<div class="container-fluid shadow">
     <div class="row mb-3 bg-info text-white">
         <div class="col text-center">
-            <h2>Форма авторизации</h2>
+            <h2>Форма авторизации для просмотра существующих обращений</h2>
         </div>
     </div>
 </div>
 <div class="container w-50">
     <div class="row row-cols-2 justify-content-md-center">
-            <form method="post" action="index.php?mode=auth" class="form-group border border-primary">
+            <form method="post" action="index.php?mode=auth" class="form-group border border-primary shadow">
                 <div class="form-group row m-3">
                     <label id="email" class="col-4 col-form-label">Email</label>
                     <input id="email" class="col" type="email" name="email" placeholder="Адрес email" required="">
@@ -18,10 +18,10 @@
                 </div>
                 <div class="form-group row justify-content-md-center m-3">
                     <div class="col-sm">
-                        <input class="btn btn-warning col m-1" type="reset" value="Очистить данные">
+                        <input class="btn btn-warning col m-1 shadow" type="reset" value="Очистить данные">
                     </div>
                     <div class="col-sm">
-                        <input class="btn btn-primary col m-1" type="submit" value="Отправить">
+                        <input class="btn btn-primary col m-1 shadow" type="submit" value="Отправить">
                     </div>
                 </div>
             </form>

@@ -1,34 +1,32 @@
 <?php
 require('page_parts/0.0_Header.html');
-
+define('BEEPBOOP', false);
 $mode = $_REQUEST['mode'];
 
 if (!isset($mode)) {
     include('page_parts/1.0_Index.html');
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode == 'add') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode === 'add') {
     require('page_parts/3.0_Form.html');
 }
 if (($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'add')) {
     include('page_parts/3.1_AddDataFromForm.php');
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode == 'auth') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode === 'auth') {
     require('page_parts/6.0_Auth.html');
 }
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mode == 'auth') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'auth') {
     require('page_parts/6.1_ListData.php');
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    print('<div class="form-group"><pre>');
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP == true) {
+    print('<div><pre>');
     print('$_REQUEST =><br>');
     print_r($_REQUEST);
-    if (isset($_FILES)) {
-        print('$_FILES =><br>');
-        print_r($_FILES);
-    }
+    print('$_FILES =><br>');
+    print_r($_FILES);
     print('</pre></div>');
 }
 

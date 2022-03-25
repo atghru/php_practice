@@ -1,4 +1,4 @@
 <?php
-print('<div class="alert alert-success pt-3" role="alert">');
-print('👍 Запись № '. mysqli_insert_id($link) . ' добавлена в таблицу.');
+print('<div class="alert alert-success shadow mb-3" role="alert">');
+print($success_msg);
 print('</div>');

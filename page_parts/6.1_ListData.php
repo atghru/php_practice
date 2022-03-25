@@ -1,14 +1,12 @@
 <?php
 
-print('<div class="container-fluid">
-<div class="row mb-3 bg-info text-white">
+print('<div class="container-fluid shadow">
+<div class="row bg-info text-white">
     <div class="col text-center">
         <h2>Просмотр существующих обращений</h2>
     </div>
 </div>
 </div>');
-
-print('<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa nihil eveniet assumenda sequi consectetur labore in, illo alias. Voluptatibus ratione repudiandae eum magni! Quibusdam aspernatur nemo, explicabo dolores doloribus corrupti.</p>');
 
 require_once('dbconfig.php');
 $mysqli_link = mysqli_connect(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -16,9 +14,6 @@ mysqli_set_charset($mysqli_link, 'utf8mb4');
 
 if (mysqli_connect_errno()) {
     throw new RuntimeException('mysqli connection error: ' . mysqli_connect_error());
-} else {
-    echo '👍 Установлено подключение к БД!<br>';
-    echo '<br>';
 }
 
 $auth_email = trim($_REQUEST['email']);
@@ -31,9 +26,11 @@ $result_arr = mysqli_query($mysqli_link, $query);
             $query = "SELECT uid, firstname, lastname, email FROM 6711f799_users";
             if ($result = mysqli_query($mysqli_link, $query)) {
                 mysqli_close($mysqli_link);
-                echo "Здравствуйте, $row[firstname] 👋";
-                echo '<table class="table">';
-                echo '<thead>';
+                $success_msg = "Здравствуйте, $row[firstname]! 👋";
+                require('page_parts/2.2_AlertSuccess.php');
+                echo '<div class="container p-0 mb-0 shadow">';
+                echo '<table class="table table-striped border border-secondary">';
+                echo '<thead class="table-secondary">';
                 echo '<tr>';
                 echo '  <th scope="col">id</th>';
                 echo '  <th scope="col">Firstname</th>';
@@ -53,15 +50,19 @@ $result_arr = mysqli_query($mysqli_link, $query);
                 }
                 echo '</tbody>';
                 echo '</table>';
-            } else {
+                echo '</div>';
+            }
+            else {
                 printf(' 👎 Что-то пошло не так.\n');
             }
-            echo '</div>';
         }
         else {
-            echo " <script>alert('Введен неверный пароль.');</script>  ";
+            $error_msg = '👎 Ошибка: введен неверный пароль.';
+            require('page_parts/2.1_AlertDanger.php');
         }
     }
     else {
-        echo " <script>alert('Доступ запрещен!');</script>  ";
+        $error_msg = '👎 Ошибка: пользователь не зарегистрирован либо отсутствует доступ к списку пользователей.';
+        require('page_parts/2.1_AlertDanger.php');
     }
+// echo '</div>';
