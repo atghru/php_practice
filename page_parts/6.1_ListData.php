@@ -23,7 +23,11 @@ $result_arr = mysqli_query($mysqli_link, $query);
     if (mysqli_num_rows($result_arr) === 1) {
         $row = mysqli_fetch_assoc($result_arr);
         if (password_verify($_POST['password'], $row['salt'])) {
-            $query = "select m.msgid, u.firstname, u.lastname, u.email, m.msgtext, m.filepath from 6711f799_messages as m inner join 6711f799_users as u on m.uid=u.uid";
+            // $num_pages_query = "select count(msgid) from 6711f799_messages";
+            // $num_pages_query_count = mysqli_query($mysqli_link, $num_pages_query);
+            // print_r($num_pages_query_count);
+            // print($num_pages_query_count[0]['id']);
+            $query = "select m.msgid, u.firstname, u.lastname, u.email, m.msgtext, m.filepath from 6711f799_messages as m inner join 6711f799_users as u on m.uid=u.uid LIMIT 0, 10";
             if ($result = mysqli_query($mysqli_link, $query)) {
                 mysqli_close($mysqli_link);
                 $success_msg = "Здравствуйте, $row[firstname]! 👋";

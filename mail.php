@@ -1,5 +1,6 @@
 <?php
 
+    $userlisting_word = ($userlisting===1) ? ('enabled') : ('disabled');
     $message = "
     В таблицу пользователей внесена следующая запись:
     User id: $current_uid
@@ -7,12 +8,12 @@
     Lastname: $lastname
     Email: $email
     Gender: $gender
-    Userlisting: $userlisting
+    Userlisting: $userlisting_word
 
     В таблицу сообщений внесена следующая запись:
     Message id: $msgid
     User id: $current_uid
-    Filepath: $fileName
+    Filepath: ./upload/$msgid/$fileName
     Message text: $textarea
     ";
 
