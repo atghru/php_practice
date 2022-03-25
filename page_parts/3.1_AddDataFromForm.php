@@ -36,7 +36,8 @@ else {
         $currentDirectory = getcwd();
         $uploadDirectory = "/upload/";
         if (mysqli_query($link, $query_insert_msg)) {
-            $folder_name=strval(mysqli_insert_id($link))."/";
+            $msgid = mysqli_insert_id($link);
+            $folder_name=strval($msgid)."/";
             if (!file_exists($currentDirectory.$uploadDirectory.$folder_name))
             {
                 mkdir($currentDirectory.$uploadDirectory.$folder_name, 0777);
@@ -65,7 +66,7 @@ else {
             $error_msg = '👎 Ошибка: '.mysqli_error($link);
             require('page_parts/2.1_AlertDanger.php');
         }
-
+        include('mail.php');
     }
     else {
         $error_msg = '👎 Ошибка: '.mysqli_error($link);
