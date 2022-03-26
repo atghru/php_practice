@@ -51,14 +51,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP) {
     print('</pre></div>');
 }
 
-if ($_SESSION['user_is_authorized'] === true){
-    print("user is authorized");
-    print("<a href=\"index.php?stop_session=1\">STOP SESSION</a>");
-}
-else {
-    print("user is not authorized");
-}
+// if ($_SESSION['user_is_authorized'] === true) {
+//     include('page_parts/0.1_UserIsAuthorized.php');
+// }
 
-include('page_parts/99.1_ReturnButton.html');
+include('page_parts/99.1_ReturnButton.php');
 
 require('page_parts/99.0_Footer.html');

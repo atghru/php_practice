@@ -6,62 +6,61 @@
     </div>
 </div>
 <div>
-
-                    <form method="post" action="index.php?mode=add" class="form-group border border-primary shadow"  enctype="multipart/form-data">
-                        <div class="row row-cols-2 justify-content-md-center">
-                        <div class="form-group row m-3">
-                            <label for="firstname" class="col col-form-label text-center">Имя</label>
-                            <input id="firstname" class="col shadow" type="text" name="firstname" placeholder="Имя" required="">
-                        </div>
-                        <div class="form-group row m-3">
-                            <label for="lastname" class="col col-form-label text-center">Фамилия</label>
-                            <input id="lastname" class="col shadow" type="text" name="lastname" placeholder="Фамилия" required="">
-                        </div>
-                        <div class="form-group row m-3">
-                            <label id="email" class="col col-form-label text-center">Email</label>
-                            <input id="email" class="col shadow" type="email" name="email" placeholder="Адрес email" required="">
-                        </div>
-                        <div class="form-group row m-3">
-                            <label id="password" class="col col-form-label text-center">Пароль</label>
-                            <input id="password" class="col shadow" type="password" name="password" placeholder="Пароль" required="" autocomplete="new-password">
-                        </div>
-                        <div class="form-group row m-3">
-                            <legend class="col-form-label col text-center">Пол</legend>
-                            <div class="col align-self-center">
-                                <div class="form-check-inline">
-                                    <input id="checkbox_gender_male" class="form-check-input shadow" type="radio" value="male" name="gender" required>
-                                    <label class="form-check-label" for="checkbox_gender_male">Мужской</label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <input id="checkbox_gender_female" class="form-check-input shadow" type="radio" value="female" name="gender" required>
-                                    <label class="form-check-label" for="checkbox_gender_female">Женский</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row m-3">
-                                <label for="userlisting" class="col col-form-label col text-center">Доступ к списку пользователей</label>
-                                <select class="form-control col shadow" id="userlisting" name="userlisting" required>
-                                    <option value="enabled">Разрешен</option>
-                                    <option value="disabled">Запрещен</option>
-                                </select>
-                        </div>
-                        <div class="form-group row m-3">
-                            <label for="form_textarea" class="col col-form-label text-center">Ваше сообщение</label>
-                            <textarea maxlength="255" class="form-control col shadow" id="form_textarea" name="form_textarea" rows="4" placeholder="Наберите текст Вашего сообщения в данном поле. Внимание, длина текста не должна превышать 255 символов" required></textarea>
-                            </select>
-                        </div>
-                        <div class="for-group row m-3">
-                            <label for="input_file" class="col col-form-label text-center">Выберите файл для загрузки (.txt, .jpg, .jpeg, .png)</label>
-                            <input type="file" class="col align-self-center" id="input_file" name="input_file" required accept=".txt,.jpg,.jpeg,.png">
-                        </div>
-                        <div class="form-group row justify-content-center align-items-center m-3">
-                            <div class="col-sm-4">
-                                    <input class="btn btn-warning btn-block shadow" type="reset" value="Очистить" title="Внимание! Действие удалит все введенные данные из формы!">
-                            </div>
-                            <div class="col-sm-4">
-                                <input class="btn btn-primary btn-block shadow" type="submit" value="Отправить">
-                        </div>
-                        </div>
-                    </form>
+    <form method="post" action="index.php?mode=add" class="form-group border border-primary shadow"  enctype="multipart/form-data">
+        <div class="row row-cols-2 justify-content-center p-1">
+        <div class="form-group row m-1">
+            <label for="firstname" class="col col-form-label text-center">Имя</label>
+            <input id="firstname" class="col shadow" type="text" name="firstname" placeholder="Имя" required="">
+        </div>
+        <div class="form-group row m-1">
+            <label for="lastname" class="col col-form-label text-center">Фамилия</label>
+            <input id="lastname" class="col shadow" type="text" name="lastname" placeholder="Фамилия" required="">
+        </div>
+        <div class="form-group row m-1">
+            <label id="email" class="col col-form-label text-center">Email</label>
+            <input id="email" class="col shadow" type="email" name="email" placeholder="Адрес email" required="">
+        </div>
+        <div class="form-group row m-1">
+            <label id="password" class="col col-form-label text-center">Пароль</label>
+            <input id="password" class="col shadow " type="password" name="password" placeholder="Пароль" required="" autocomplete="new-password">
+        </div>
+        <div class="form-group row m-1">
+            <legend class="col-form-label col text-center">Пол</legend>
+            <div class="col align-self-center">
+                <div class="form-check-inline">
+                    <input id="checkbox_gender_male" class="form-check-input shadow" type="radio" value="male" name="gender" required>
+                    <label class="form-check-label" for="checkbox_gender_male">Мужской</label>
+                </div>
+                <div class="form-check-inline">
+                    <input id="checkbox_gender_female" class="form-check-input shadow" type="radio" value="female" name="gender" required>
+                    <label class="form-check-label" for="checkbox_gender_female">Женский</label>
+                </div>
             </div>
+        </div>
+        <div class="form-group row m-1">
+                <label for="userlisting" class="col col-form-label col text-center">Доступ к списку пользователей</label>
+                <select class="form-control col shadow align-self-center" id="userlisting" name="userlisting" required>
+                    <option value="enabled">Разрешен</option>
+                    <option value="disabled">Запрещен</option>
+                </select>
+        </div>
+        <div class="form-group row m-1">
+            <label for="form_textarea" class="col col-form-label text-center">Ваше сообщение</label>
+            <textarea maxlength="255" class="form-control col shadow" id="form_textarea" name="form_textarea" rows="4" placeholder="Наберите текст Вашего сообщения в данном поле. Внимание, длина текста не должна превышать 255 символов" required></textarea>
+            </select>
+        </div>
+        <div class="for-group row m-1">
+            <label for="input_file" class="col col-form-label text-center">Выберите файл для загрузки (.txt, .jpg, .jpeg, .png)</label>
+            <input type="file" class="col align-self-center" id="input_file" name="input_file" required accept=".txt,.jpg,.jpeg,.png">
+        </div>
+        <div class="form-group row justify-content-center align-items-center m-1">
+            <div class="col-sm-4">
+                    <input class="btn btn-warning btn-block shadow" type="reset" value="Очистить" title="Внимание! Действие удалит все введенные данные из формы!">
+            </div>
+            <div class="col-sm-4">
+                <input class="btn btn-primary btn-block shadow" type="submit" value="Отправить">
+        </div>
+        </div>
+    </form>
+</div>
 </div>

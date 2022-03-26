@@ -1,6 +1,6 @@
 <?php
 
-print('<div class="container-fluid shadow">
+print('<div class="container-fluid shadow mb-3">
 <div class="row bg-info text-white">
     <div class="col text-center">
         <h2>Просмотр существующих обращений</h2>
@@ -17,9 +17,8 @@ if ($mode==='list') {
         throw new RuntimeException('mysqli connection error: ' . mysqli_connect_error());
     }
 
-    // $current_page = 2;
     $current_page = $_REQUEST['current_page'] ? $_REQUEST['current_page'] : 1;
-    print("current_page=$current_page");
+    // print("current_page=$current_page");
 
     // $auth_email = (isset($_SESSION['user_is_authorized'])) ? ($_SESSION['user_email']) : (trim($_REQUEST['email']));
 
@@ -33,6 +32,7 @@ if ($mode==='list') {
                 $_SESSION['user_is_authorized'] = true;
                 $_SESSION['user_email'] = $auth_email;
                 $_SESSION['user_name'] = $row['firstname'];
+                $_SESSION['results_on_page'] = 10;
             }
             else {
                 $error_msg = '👎 Ошибка: введен неверный пароль.';
@@ -40,7 +40,7 @@ if ($mode==='list') {
             }
         }
         else {
-            $error_msg = '👎 Ошибка: пользователь не зарегистрирован либо отсутствует доступ к списку пользователей.';
+            $error_msg = '👎 Ошибка: пользователь не авторизован или отсутствует доступ к списку пользователей.';
             require('page_parts/2.1_AlertDanger.php');
         }
     }
@@ -48,27 +48,34 @@ if ($mode==='list') {
         $num_msgid_query = "select count(msgid) from 6711f799_messages";
         $num_msgid_query_result = mysqli_fetch_row(mysqli_query($mysqli_link, $num_msgid_query));
         $num_msgids = $num_msgid_query_result[0];
-        $results_on_page = 3;
+        $results_on_page = (isset($_POST['results_on_page'])) ? $_POST['results_on_page'] : $_SESSION['results_on_page'];
+        $_SESSION['results_on_page'] = $results_on_page;
+
+        echo '<form method="post" action="index.php?mode=list">';
+        echo '<div class="input-group mb-3">';
+        // echo '<label class="input-group-text" for="results_on_page">Количество строк</label>';
+        echo '<select class="form-select" name="results_on_page">';
+        echo '<option selected>Количество строк</option>';
+        for ($i = 1; $i < $results_on_page; $i++ ){
+            echo '<option value="'.$i.'">'.$i.'</option>';
+        }
+        echo '<option value="'.$num_msgids.'">Все ('.$num_msgids.')</option>';
+        echo '</select>';
+        echo '<input type="submit">';
+        echo '</div>';
+        echo '</form>';
+
         $num_pages = ceil($num_msgids / $results_on_page);
-        print("total number of pages = $num_pages");
+        // print("total number of pages = $num_pages");
         //find out lower and upper limits for query
         $lower_limit = $current_page*$results_on_page-$results_on_page;
         // $upper_limit = $current_page*$results_on_page;
-        print("lower_limit=$lower_limit and upper_limit=$upper_limit");
-        //send to next page
-        $next_page = $current_page + 1;
-        if ($current_page>1) {
-            $previous_page = $current_page - 1;
-            print("<a href=\"index.php?mode=list&current_page=$previous_page\">BUTTON TO THE PREVIOUS PAGE</a>");
-        }
-        if ($next_page <= $num_pages) {
-            print("<a href=\"index.php?mode=list&current_page=$next_page\">BUTTON TO THE NEXT PAGE</a>");
-        }
+        // print("lower_limit=$lower_limit and upper_limit=$upper_limit");
         $query = "select m.msgid, u.firstname, u.lastname, u.email, m.msgtext, m.filepath from 6711f799_messages as m inner join 6711f799_users as u on m.uid=u.uid LIMIT $lower_limit, $results_on_page";
         if ($result = mysqli_query($mysqli_link, $query)) {
             mysqli_close($mysqli_link);
-            $success_msg = "Здравствуйте, ". $_SESSION['user_name'] ."! 👋";
-            require('page_parts/2.2_AlertSuccess.php');
+            // $success_msg = "Здравствуйте, ". $_SESSION['user_name'] ."! 👋";
+            // require('page_parts/2.2_AlertSuccess.php');
             echo '<div class="container p-0 mb-0 shadow">';
             echo '<table class="table table-striped border border-secondary">';
             echo '<thead class="table-secondary">';
@@ -93,6 +100,40 @@ if ($mode==='list') {
             echo '</tbody>';
             echo '</table>';
             echo '</div>';
+
+            //send to next page
+            $next_page = $current_page + 1;
+            if ($next_page <= $num_pages) {
+                // print("<a href=\"index.php?mode=list&current_page=$next_page\">BUTTON TO THE NEXT PAGE</a>");
+            }
+            else {
+                $next_page_disabled = 'disabled';
+            }
+            if ($current_page>1) {
+                $previous_page = $current_page - 1;
+                // print("<a href=\"index.php?mode=list&current_page=$previous_page\">BUTTON TO THE PREVIOUS PAGE</a>");
+            }
+            else {
+                $previouse_page_disabled = 'disabled';
+            }
+            echo '<nav aria-label="Page navigation example">';
+            echo '<ul class="pagination justify-content-center">';
+              echo '<li class="page-item shadow '. $previouse_page_disabled .'">';
+                echo '<a class="page-link" href="index.php?mode=list&current_page='.$previous_page.'" aria-label="Previous">';
+                  echo '<span aria-hidden="true">&laquo;</span>';
+                echo '</a>';
+              echo '</li>';
+              for ($i = 1; $i <= $num_pages; $i++) {
+                  $current_page_active = ($i == $current_page) ? 'active' : '';
+                  echo '<li class="page-item shadow '.$current_page_active.'"><a class="page-link" href="index.php?mode=list&current_page=' . $i . '">' . $i . '</a></li>';
+              }
+              echo '<li class="page-item shadow '. $next_page_disabled .'">';
+                echo '<a class="page-link" href="index.php?mode=list&current_page='.$next_page.'" aria-label="Next">';
+                  echo '<span aria-hidden="true">&raquo;</span>';
+                echo '</a>';
+              echo '</li>';
+            echo '</ul>';
+            echo '</nav>';
         }
         else {
             printf(' 👎 Что-то пошло не так.\n');
