@@ -76,8 +76,8 @@ if ($mode==='list') {
             mysqli_close($mysqli_link);
             // $success_msg = "Здравствуйте, ". $_SESSION['user_name'] ."! 👋";
             // require('page_parts/2.2_AlertSuccess.php');
-            echo '<div class="container p-0 mb-0 shadow">';
-            echo '<table class="table table-striped border border-secondary">';
+            echo '<div class="container p-0 mb-0">';
+            echo '<table class="table table-striped border border-secondary shadow">';
             echo '<thead class="table-secondary">';
             echo '<tr>';
             echo '  <th scope="col">Message id</th>';
@@ -93,8 +93,8 @@ if ($mode==='list') {
                 <th scope=\"row\">$row[0]</th>
                 <td>$row[1] $row[2]</td>
                 <td>$row[3]</td>
-                <td>$row[4]</td>
-                <td><a class=\"bi bi-cloud-arrow-down\" href=\"/download.php?msgid=$row[0]&filename=$row[5]\">$row[5] <img src=\"cloud-arrow-down.svg\"></a></td>
+                <td class=\"d-inline-block text-truncate\" style=\"max-width: 300px;\">$row[4]</td>
+                <td><a href=\"/download.php?msgid=$row[0]&filename=$row[5]\">$row[5]</a></td>
                 </tr>");
             }
             echo '</tbody>';
@@ -134,7 +134,7 @@ if ($mode==='list') {
               echo '</li>';
             echo '</ul>';
             echo '</nav>';
-            if ($_POST['remember_me'] != 'yes') {
+            if ($_POST['remember_me'] == 'no') {
                 session_unset();
                 session_destroy();
             }
