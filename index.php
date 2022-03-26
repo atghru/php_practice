@@ -4,7 +4,7 @@ session_start();
 
 require('page_parts/0.0_Header.html');
 
-define('BEEPBOOP', true);
+define('BEEPBOOP', false);
 $mode = $_REQUEST['mode'];
 
 if (!isset($mode)) {

@@ -61,7 +61,7 @@ if ($mode==='list') {
         }
         echo '<option value="'.$num_msgids.'">Все ('.$num_msgids.')</option>';
         echo '</select>';
-        echo '<input type="submit">';
+        echo '<input type="submit" value="Изменить">';
         echo '</div>';
         echo '</form>';
 
@@ -134,6 +134,10 @@ if ($mode==='list') {
               echo '</li>';
             echo '</ul>';
             echo '</nav>';
+            if ($_POST['remember_me'] != 'yes') {
+                session_unset();
+                session_destroy();
+            }
         }
         else {
             printf(' 👎 Что-то пошло не так.\n');
