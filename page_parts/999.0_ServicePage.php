@@ -8,12 +8,14 @@ $table_users_query = 'CREATE TABLE `6711f799_users` (
     `email` varchar(256) COLLATE utf8mb4_unicode_520_ci NOT NULL,
     `gender` enum("male","female") COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
     `salt` varchar(256) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,
+    `userlisting` tinyint(1) NOT NULL DEFAULT 1,
     PRIMARY KEY (`id`),
     UNIQUE KEY `email` (`email`)
   )';
 
 $table_messages_query = 'CREATE TABLE `6711f799_messages` (
     `msgid` int(8) NOT NULL AUTO_INCREMENT,
+    `uid` int(8) NOT NULL,
     `msgtext` varchar(256) COLLATE utf8mb4_unicode_520_ci NOT NULL,
     `filepath` varchar(256) COLLATE utf8mb4_unicode_520_ci,
     PRIMARY KEY (`msgid`),

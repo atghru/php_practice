@@ -1,11 +1,27 @@
 <?php
 // phpinfo();
+session_start();
+
 require('page_parts/0.0_Header.html');
-define('BEEPBOOP', false);
+
+define('BEEPBOOP', true);
 $mode = $_REQUEST['mode'];
 
 if (!isset($mode)) {
     include('page_parts/1.0_Index.html');
+}
+
+if ($_REQUEST['stop_session']==1) {
+    session_unset();
+    session_destroy();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode === 'list') {
+    require('page_parts/6.1_ListData.php');
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'list') {
+    require('page_parts/6.1_ListData.php');
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode === 'add') {
@@ -16,10 +32,14 @@ if (($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'add')) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && $mode === 'auth') {
-    require('page_parts/6.0_Auth.html');
-}
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && $mode === 'auth') {
-    require('page_parts/6.1_ListData.php');
+    if ($_SESSION['user_is_authorized'] === true) {
+        $mode = 'list';
+        require('page_parts/6.1_ListData.php');
+    }
+    else {
+        require('page_parts/6.0_Auth.html');
+    }
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP) {
@@ -29,6 +49,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && BEEPBOOP) {
     print('$_FILES =><br>');
     print_r($_FILES);
     print('</pre></div>');
+}
+
+if ($_SESSION['user_is_authorized'] === true){
+    print("user is authorized");
+    print("<a href=\"index.php?stop_session=1\">STOP SESSION</a>");
+}
+else {
+    print("user is not authorized");
 }
 
 include('page_parts/99.1_ReturnButton.html');
