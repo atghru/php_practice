@@ -56,7 +56,7 @@ if ($mode==='list') {
         // echo '<label class="input-group-text" for="results_on_page">Количество строк</label>';
         echo '<select class="form-select" name="results_on_page">';
         echo '<option selected>Количество строк</option>';
-        for ($i = 1; $i < $results_on_page; $i++ ){
+        for ($i = 1; $i < 10; $i++ ){
             echo '<option value="'.$i.'">'.$i.'</option>';
         }
         echo '<option value="'.$num_msgids.'">Все ('.$num_msgids.')</option>';
