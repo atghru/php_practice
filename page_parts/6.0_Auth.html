@@ -1,0 +1,35 @@
+<div class="container-fluid shadow">
+    <div class="row mb-3 bg-info text-white">
+        <div class="col text-center">
+            <h2>Форма авторизации для просмотра существующих обращений</h2>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row row-cols-2 justify-content-md-center">
+            <form method="post" action="index.php?mode=list" class="form-group border border-primary shadow" style="max-width: 400px;">
+                <div class="form-group row m-3">
+                    <label id="email" class="col-4 col-form-label">Email</label>
+                    <input id="email" class="col" type="email" name="email" placeholder="Адрес email" required="">
+                </div>
+                <div class="form-group row m-3">
+                    <label id="password" class="col-4 col-form-label">Пароль</label>
+                    <input id="password" class="col" type="password" name="password" placeholder="Пароль" required="" autocomplete="new-password">
+                </div>
+                <div class="form-group row justify-content-md-center m-3">
+                    <div class="col-sm">
+                        <input class="btn btn-warning col m-1 shadow" type="reset" value="Очистить">
+                    </div>
+                    <div class="col-sm">
+                        <input class="btn btn-primary col m-1 shadow" type="submit" value="Отправить">
+                    </div>
+                </div>
+                <div class="form-check d-flex justify-content-center pb-3">
+                    <label class="form-check-label">
+                        <input class="form-check-input shadow" type="checkbox" value="no" name="remember_me" id="remember_me">
+                        Не запоминать меня
+                    </label>
+                </div>
+            </form>
+    </div>
+</div>
