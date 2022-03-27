@@ -49,6 +49,7 @@ if ($mode==='list') {
         $num_msgid_query_result = mysqli_fetch_row(mysqli_query($mysqli_link, $num_msgid_query));
         $num_msgids = $num_msgid_query_result[0];
         $results_on_page = (isset($_POST['results_on_page'])) ? $_POST['results_on_page'] : $_SESSION['results_on_page'];
+        $array_results_on_page = array(10,15,25,50);
         $_SESSION['results_on_page'] = $results_on_page;
 
         echo '<form method="post" action="index.php?mode=list">';
@@ -56,7 +57,8 @@ if ($mode==='list') {
         // echo '<label class="input-group-text" for="results_on_page">Количество строк</label>';
         echo '<select class="form-select" name="results_on_page">';
         echo '<option selected>Количество строк</option>';
-        for ($i = 1; $i < 10; $i++ ){
+        // for ($i = 1; $i < 10; $i++ ){
+        foreach ($array_results_on_page as $i) {
             echo '<option value="'.$i.'">'.$i.'</option>';
         }
         echo '<option value="'.$num_msgids.'">Все ('.$num_msgids.')</option>';
