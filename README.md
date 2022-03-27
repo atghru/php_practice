@@ -15,10 +15,8 @@
       ```bash
       $ git clone https://github.com/atghru/php_practice.git development-docker/app/www/
       ```
-    * или распаковать архив проекта
-      ```bash
-      $ tar xzvf archive.tgz -C development/app/www/
-      ```
+    * или распаковать архив проекта в директорию development/app/www/
+      
 2. Права для пользователя и группы www-data (uid 33, gid 33) на директории "development-docker/app/log/sendmail", "development-docker/app/www/upload"
     * ```bash
       $ chown 33:33 путь/до/директории
