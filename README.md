@@ -35,7 +35,7 @@
       ```
     * Загрузка дампа БД
       ```shell
-      $ docker exec mysql5.7 -c 'mysql crudbp -ucrudboy -pcrudpass --default-character-set=utf8mb4' < crudb_dump.sql
+      $ docker exec -i mysql5.7 sh -c 'exec mysql crudb -ucrudboy -pcrudpass  --default-character-set=utf8mb4' < crudb_dump.sql
       ```
 ## Использование проекта
 
